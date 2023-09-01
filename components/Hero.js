@@ -5,8 +5,8 @@ export default function Hero({ product }) {
         <h1 className="text-5xl">{product.title}</h1>
         <p>{product.description}</p>
         <div className="flex gap-2">
-          <button className="btn-default">Read More</button>
-          <button className="btn-primary flex gap-1">
+          <button className="btn-default btn-ani">Read More</button>
+          <button className="btn-primary flex gap-1 btn-ani">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

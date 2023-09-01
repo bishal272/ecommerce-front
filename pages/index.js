@@ -5,7 +5,6 @@ import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 
 export default function index({ featuredProduct, newProducts }) {
-  console.log({ newProducts });
   return (
     <Layout>
       <div className="pl-40 pr-20 bg-black pt-5">

@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 .btn-primary {
-  @apply bg-primary text-white rounded-md py-2 px-4;
+  @apply bg-white text-black rounded-md py-2 px-4;
 }
 .btn-default {
   @apply bg-black text-white rounded-md py-2 px-4 border border-gray-200;
 }
 nav a:hover {
   @apply text-white;
+}
+.btn-ani {
+  @apply hover:scale-110 transition ease-in-out;
 }
