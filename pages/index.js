@@ -3,8 +3,10 @@ import HomeProducts from "@/components/HomeProducts";
 import Layout from "@/components/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
+import { useSession } from "next-auth/react";
 
 export default function index({ featuredProduct, newProducts }) {
+  const { data: session } = useSession();
   return (
     <Layout>
       <div className="pl-40 pr-20 bg-black pt-5">

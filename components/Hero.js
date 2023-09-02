@@ -1,16 +1,33 @@
+import { signIn, useSession } from "next-auth/react";
 import { useContext } from "react";
+import { withSwal } from "react-sweetalert2";
 import { CartContext } from "./CartContext";
 
-export default function Hero({ product }) {
+function Hero({ product, swal }) {
+  const { data: session } = useSession();
   const { addProduct } = useContext(CartContext);
   function addHeroProductToCart() {
-    addProduct(product._id);
+    if (!session) {
+      swal
+        .fire({
+          title: "You are Not logged in",
+          confirmButtonText: "Sign in with google",
+        })
+        .then((result) => {
+          // when confirmed and promise resolved...
+          if (result.isConfirmed) {
+            signIn("google");
+          }
+        });
+    } else {
+      addProduct(product._id);
+    }
   }
   return (
-    <div className=" bg-black text-white flex justify-center items-center gap-36">
+    <div className=" bg-black text-white flex justify-center items-center gap-38 py-4">
       <div className="flex flex-col gap-10 ">
         <h1 className="text-5xl">{product.title}</h1>
-        <p>{product.description}</p>
+        <p className="text-gray-400">{product.description}</p>
         <div className="flex gap-2">
           <button className="btn-default btn-ani">Read More</button>
           <button className="btn-primary flex gap-1 btn-ani" onClick={addHeroProductToCart}>
@@ -27,9 +44,10 @@ export default function Hero({ product }) {
       </div>
       <div className="flex justify-center items-">
         <div className="">
-          <img src={product.images[0]} alt="" />
+          <img src={product.images[0]} alt="" className="w-3/4 float-right" />
         </div>
       </div>
     </div>
   );
 }
+export default withSwal(({ swal, ...rest }, ref) => <Hero {...rest} swal={swal} />);

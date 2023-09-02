@@ -1,7 +1,29 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useContext } from "react";
+import { withSwal } from "react-sweetalert2";
+import { CartContext } from "./CartContext";
 
-export default function ProductBox({ _id, title, description, price, images }) {
-  
+function ProductBox({ _id, title, description, price, images, swal }) {
+  const { addProduct } = useContext(CartContext);
+  const { data: session } = useSession();
+  function addProductToCart() {
+    if (!session) {
+      swal
+        .fire({
+          title: "You are Not logged in",
+          confirmButtonText: "Sign in with google",
+        })
+        .then((result) => {
+          // when confirmed and promise resolved...
+          if (result.isConfirmed) {
+            signIn("google");
+          }
+        });
+    } else {
+      addProduct(_id);
+    }
+  }
   return (
     <div className="drop-shadow-lg">
       <Link
@@ -35,7 +57,9 @@ export default function ProductBox({ _id, title, description, price, images }) {
           </svg>
           Assured Delivery
         </span>
-        <button className="gap-1 border border-gray-500 text-black flex rounded-md py-1 px-2 shadow-md btn-ani ">
+        <button
+          className="gap-1 border border-gray-200 text-black flex rounded-md py-1 px-2 shadow-sm btn-ani"
+          onClick={addProductToCart}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -49,3 +73,4 @@ export default function ProductBox({ _id, title, description, price, images }) {
     </div>
   );
 }
+export default withSwal(({ swal, ...rest }, ref) => <ProductBox {...rest} swal={swal} />);

@@ -23,7 +23,7 @@ export default function Header() {
         <Link href={"/products"}>All products</Link>
         <Link href={"/categories"}>Categories</Link>
         <Link href={"/account"}>Account</Link>
-        <Link href={"/"}>Cart({cartProducts.length})</Link>
+        <Link href={"/cart"}>Cart({cartProducts.length})</Link>
       </nav>
     </div>
   );
