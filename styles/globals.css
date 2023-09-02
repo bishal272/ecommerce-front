@@ -14,7 +14,7 @@ nav a:hover {
   @apply hover:scale-110 transition ease-in-out;
 }
 table.basic {
-  @apply w-full bg-white rounded-sm shadow-md;
+  @apply w-full bg-white rounded-sm;
 }
 table.basic thead tr td {
   @apply text-sm text-gray-600 uppercase border-b border-gray-200 px-4 py-2;
