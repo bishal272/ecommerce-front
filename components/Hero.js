@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
+
 export default function Hero({ product }) {
+  const { addProduct } = useContext(CartContext);
+  function addHeroProductToCart() {
+    addProduct(product._id);
+  }
   return (
     <div className=" bg-black text-white flex justify-center items-center gap-36">
       <div className="flex flex-col gap-10 ">
@@ -6,7 +13,7 @@ export default function Hero({ product }) {
         <p>{product.description}</p>
         <div className="flex gap-2">
           <button className="btn-default btn-ani">Read More</button>
-          <button className="btn-primary flex gap-1 btn-ani">
+          <button className="btn-primary flex gap-1 btn-ani" onClick={addHeroProductToCart}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
