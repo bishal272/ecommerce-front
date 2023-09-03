@@ -1,9 +1,11 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 
 export default function Header() {
   const { cartProducts } = useContext(CartContext);
+  const { data: session } = useSession();
   const [showNav, setShowNav] = useState(false);
   return (
     <div className="flex justify-between bg-black text-white md:px-40 px-12 py-7 md:py-4 w-full">
@@ -30,8 +32,9 @@ export default function Header() {
           }>
           <Link href={"/"}>Home</Link>
           <Link href={"/products"}>All products</Link>
-          <Link href={"/categories"}>Categories</Link>
-          <Link href={"/account"}>Account</Link>
+          <Link href={"/account"}>
+            Account{session ? ` (${session.user.name.split(" ")[0]})` : ""}
+          </Link>
           <Link href={"/cart"}>Cart({cartProducts.length})</Link>
         </div>
       </nav>

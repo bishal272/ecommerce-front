@@ -1,8 +1,8 @@
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import { withSwal } from "react-sweetalert2";
 import { CartContext } from "./CartContext";
-import { useRouter } from "next/router";
 
 function Hero({ product, swal }) {
   const { data: session } = useSession();
@@ -12,8 +12,12 @@ function Hero({ product, swal }) {
     if (!session) {
       swal
         .fire({
-          title: "You are Not logged in",
+          title: "Log in to start shopping😊",
           confirmButtonText: "Sign in with google",
+          cancelButtonText: "Cancel",
+          showCancelButton: "True",
+          cancelButtonColor: "#ff7f7f",
+          confirmButtonColor: "#279EFF",
         })
         .then((result) => {
           // when confirmed and promise resolved...
@@ -29,7 +33,7 @@ function Hero({ product, swal }) {
     <div className=" bg-black text-white flex justify-center items-center flex-col-reverse  lg:flex-row lg:gap-38 lg:py-4 lg:h-96 pb-10">
       <div className="flex flex-col gap-10 ">
         <h1 className="lg:text-4xl">{product.title}</h1>
-        <p className="text-gray-400">{product.description.substring(0, 90)}</p>
+        <p className="text-gray-400">{product.description}</p>
         <div className="flex gap-2">
           <button
             className="btn-default btn-ani"
@@ -50,7 +54,7 @@ function Hero({ product, swal }) {
       </div>
       <div className="flex justify-center items-center">
         <div className="">
-          <img src={product.images[0]} alt="" className=" lg:w-3/5 md:float-right" />
+          <img src={product.images[0]} alt="" className=" lg:w-3/4 md:float-right" />
         </div>
       </div>
     </div>

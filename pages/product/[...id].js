@@ -29,8 +29,8 @@ function ProductPage({ product, swal }) {
   }
   return (
     <Layout>
-      <div className="pl-40 pr-20 pt-5 ">
-        <div className="grid grid-cols-[.6fr_1.2fr] gap-10 ">
+      <div className="md:pl-40 md:pr-20 pt-5 ">
+        <div className="grid lg:grid-cols-[.6fr_1.2fr] gap-10 ">
           <div className="bg-gray-200 w-full p-7 rounded-2xl min-h-[120] flex items-center justify-center  flex-col gap-2">
             <div className="">
               <img src={activeImage} alt="" className="max-h-72" />
