@@ -17,8 +17,9 @@ export default function index({ featuredProduct, newProducts }) {
   );
 }
 export async function getServerSideProps() {
-  const ids = (await Product.find({})).map((p) => p._id.toString());
-  const heroProduct = ids[Math.floor(Math.random() * ids.length)];
+  // const ids = (await Product.find({})).map((p) => p._id.toString());
+  // const heroProduct = ids[Math.floor(Math.random() * ids.length)];
+  const heroProduct = "64f202acccdea741adeeffaf";
   await mongooseConnect();
   const featuredProduct = await Product.findById(heroProduct);
   const newProducts = await Product.find({}, null, { sort: { _id: -1 }, limit: 10 });
