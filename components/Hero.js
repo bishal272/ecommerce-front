@@ -26,10 +26,10 @@ function Hero({ product, swal }) {
     }
   }
   return (
-    <div className=" bg-black text-white flex justify-center items-center gap-38 py-4 h-96">
+    <div className=" bg-black text-white flex justify-center items-center flex-col-reverse  lg:flex-row lg:gap-38 lg:py-4 lg:h-96 pb-10">
       <div className="flex flex-col gap-10 ">
-        <h1 className="text-5xl">{product.title}</h1>
-        <p className="text-gray-400">{product.description}</p>
+        <h1 className="lg:text-4xl">{product.title}</h1>
+        <p className="text-gray-400">{product.description.substring(0, 90)}</p>
         <div className="flex gap-2">
           <button
             className="btn-default btn-ani"
@@ -48,9 +48,9 @@ function Hero({ product, swal }) {
           </button>
         </div>
       </div>
-      <div className="flex justify-center items-">
+      <div className="flex justify-center items-center">
         <div className="">
-          <img src={product.images[0]} alt="" className="w-3/4 float-right" />
+          <img src={product.images[0]} alt="" className=" lg:w-3/5 md:float-right" />
         </div>
       </div>
     </div>

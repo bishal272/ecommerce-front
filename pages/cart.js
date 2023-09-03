@@ -77,8 +77,8 @@ export default function Cart() {
 
   return (
     <Layout>
-      <div className="pl-40 pr-20 pt-5 ">
-        <div className="grid grid-cols-[1.3fr_0.7fr] gap-10 ">
+      <div className="lg:pl-40 lg:pr-20 pt-5 ">
+        <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-10">
           <div className="bg-gray-200 w-full p-10 rounded-2xl min-h-[120]">
             <h1>Cart</h1>
             {!cartProducts?.length && <div className="p-2">Your cart is empty</div>}
@@ -103,7 +103,7 @@ export default function Cart() {
                       </td>
                       <td>
                         <button
-                          className="rounded-sm  py-1 px-3 bg-gray-300 mr-2"
+                          className="rounded-sm  py-1 px-3 bg-gray-300 mr-2 "
                           onClick={() => lessOfThisProduct(product._id)}>
                           -
                         </button>
@@ -148,22 +148,21 @@ export default function Cart() {
                     value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
                   />
-                  <div className="flex w-80 gap-2">
-                    <input
-                      type="text"
-                      placeholder="City"
-                      name="city"
-                      value={city}
-                      onChange={(ev) => setCity(ev.target.value)}
-                    />
-                    <input
-                      type="text"
-                      placeholder="Pin code"
-                      name="pinCode"
-                      value={pinCode}
-                      onChange={(ev) => setPinCode(ev.target.value)}
-                    />
-                  </div>
+
+                  <input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    value={city}
+                    onChange={(ev) => setCity(ev.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Pin code"
+                    name="pinCode"
+                    value={pinCode}
+                    onChange={(ev) => setPinCode(ev.target.value)}
+                  />
 
                   <input
                     type="text"

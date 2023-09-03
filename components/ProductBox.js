@@ -38,7 +38,7 @@ function ProductBox({ _id, title, description, price, images, swal }) {
       <div className="my-2 font-bold text-lg">
         <Link href={"/product/" + _id}>{title}</Link>
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-2 lg:flex-row  lg:justify-between lg:items-center md:w-full">
         <span className="text-xl">₹{price}</span>
 
         <span className="flex text-sm items-center">

@@ -6,9 +6,9 @@ import { Product } from "@/models/Product";
 export default function Products({ products }) {
   return (
     <Layout>
-      <div className="px-40 py-4">
-        <h1 className="text-2xl mt-10">New Arrivals</h1>
-        <div className="mt-4 grid grid-cols-3 gap-10 ">
+      <div className="lg:px-40 px-10 py-4">
+        <h1 className="text-2xl mt-10">All Products</h1>
+        <div className="mt-4 grid  md:grid-cols-2 lg:grid-cols-3 gap-10 ">
           {products?.length > 0 &&
             products.map((product) => (
               <div className="" key={product._id}>

@@ -9,7 +9,7 @@ export default function index({ featuredProduct, newProducts }) {
   const { data: session } = useSession();
   return (
     <Layout>
-      <div className="pl-40 pr-20 bg-black pt-5">
+      <div className="md:pl-40 md:pr-20 px-12 bg-black pt-5">
         <Hero product={featuredProduct} />
       </div>
       <HomeProducts newProducts={newProducts} />
