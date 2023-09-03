@@ -1,6 +1,7 @@
 import { CartContext } from "@/components/CartContext";
 import Layout from "@/components/Layout";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
 export default function Cart() {
@@ -12,6 +13,7 @@ export default function Cart() {
   const [pinCode, setPinCode] = useState();
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -28,10 +30,39 @@ export default function Cart() {
   function lessOfThisProduct(id) {
     removeProduct(id);
   }
+  async function goToPayment() {
+    const response = await axios.post("/api/checkout", {
+      name,
+      email,
+      city,
+      pinCode,
+      streetAddress,
+      country,
+      cartProducts,
+    });
+    if (response.data.url) {
+      window.location = response.data.url;
+    }
+  }
   let total = 0;
   for (const productId of cartProducts) {
     const price = products.find((p) => p._id === productId)?.price || 0;
     total += price;
+  }
+  //needs to change
+  if (router.asPath.includes("success")) {
+    return (
+      <>
+        <Layout>
+          <div className="flex items-center justify-center ">
+            <div className="bg-gray-200 w-96 p-10 rounded-2xl min-h-[120] ">
+              <h1>Thanks for your Order!</h1>
+              <p>We will email you when your order is shipped.</p>
+            </div>
+          </div>
+        </Layout>
+      </>
+    );
   }
   return (
     <Layout>
@@ -90,60 +121,60 @@ export default function Cart() {
             <div>
               <div className="bg-gray-200 rounded-2xl  relative max-h-fit pt-10">
                 <h1 className="text-3xl font-bold text-center ">Order Information</h1>
-                <form action="">
-                  <div className="w-full flex flex-col items-center justify-center mt-4 border p-4">
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      name="name"
-                      value={name}
-                      onChange={(ev) => setName(ev.target.value)}
-                    />
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      name="email"
-                      value={email}
-                      onChange={(ev) => setEmail(ev.target.value)}
-                    />
-                    <div className="flex w-80 gap-2">
-                      <input
-                        type="text"
-                        placeholder="City"
-                        name="city"
-                        value={city}
-                        onChange={(ev) => setCity(ev.target.value)}
-                      />
-                      <input
-                        type="text"
-                        placeholder="Pin code"
-                        name="pinCode"
-                        value={pinCode}
-                        onChange={(ev) => setPinCode(ev.target.value)}
-                      />
-                    </div>
 
+                <div className="w-full flex flex-col items-center justify-center mt-4 border p-4">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={name}
+                    onChange={(ev) => setName(ev.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={(ev) => setEmail(ev.target.value)}
+                  />
+                  <div className="flex w-80 gap-2">
                     <input
                       type="text"
-                      placeholder="Street Address"
-                      name="streetAddress"
-                      value={streetAddress}
-                      onChange={(ev) => setStreetAddress(ev.target.value)}
+                      placeholder="City"
+                      name="city"
+                      value={city}
+                      onChange={(ev) => setCity(ev.target.value)}
                     />
                     <input
                       type="text"
-                      placeholder="Country"
-                      name="country"
-                      value={country}
-                      onChange={(ev) => setCountry(ev.target.value)}
+                      placeholder="Pin code"
+                      name="pinCode"
+                      value={pinCode}
+                      onChange={(ev) => setPinCode(ev.target.value)}
                     />
                   </div>
-                  <input type="hidden" name="products" value={cartProducts.join(",")} />
 
-                  <div className="w-full flex items-center justify-center bottom-4 ">
-                    <button className="btn-default mb-4">Continue to Payment</button>
-                  </div>
-                </form>
+                  <input
+                    type="text"
+                    placeholder="Street Address"
+                    name="streetAddress"
+                    value={streetAddress}
+                    onChange={(ev) => setStreetAddress(ev.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Country"
+                    name="country"
+                    value={country}
+                    onChange={(ev) => setCountry(ev.target.value)}
+                  />
+                </div>
+
+                <div className="w-full flex items-center justify-center bottom-4 ">
+                  <button className="btn-default mb-4" onClick={goToPayment}>
+                    Continue to Payment
+                  </button>
+                </div>
               </div>
             </div>
           )}
