@@ -14,8 +14,12 @@ function ProductPage({ product, swal }) {
     if (!session) {
       swal
         .fire({
-          title: "You are Not logged in",
+          title: "Log in to start shopping😊",
           confirmButtonText: "Sign in with google",
+          cancelButtonText: "Cancel",
+          showCancelButton: "True",
+          cancelButtonColor: "#ff7f7f",
+          confirmButtonColor: "#279EFF",
         })
         .then((result) => {
           // when confirmed and promise resolved...
