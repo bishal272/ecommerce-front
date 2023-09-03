@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
 export default function Cart() {
-  const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,6 +13,7 @@ export default function Cart() {
   const [pinCode, setPinCode] = useState();
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +25,15 @@ export default function Cart() {
       setProducts([]);
     }
   }, [cartProducts]);
-
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    if (window.location.href.includes("success")) {
+      clearCart();
+      setIsSuccess(true);
+    }
+  }, []);
   function moreOfThisProduct(id) {
     addProduct(id);
   }
@@ -51,7 +60,7 @@ export default function Cart() {
     total += price;
   }
 
-  if (typeof window !== "undefined" && window.location.href.includes("success")) {
+  if (isSuccess) {
     return (
       <Layout>
         <div className="pl-40 pr-20 pt-5 ">
