@@ -27,7 +27,7 @@ function ProductBox({ _id, title, description, price, images, swal }) {
   return (
     <div className="drop-shadow-lg">
       <Link
-        href={"/product/id?=" + _id}
+        href={"/product/" + _id}
         className="p-6 rounded-md shadow-inner bg-gray-200 flex items-center justify-center">
         <img
           src={images[0]}
@@ -36,7 +36,7 @@ function ProductBox({ _id, title, description, price, images, swal }) {
         />
       </Link>
       <div className="my-2 font-bold text-lg">
-        <Link href={"/"}>{title}</Link>
+        <Link href={"/product/" + _id}>{title}</Link>
       </div>
       <div className="flex justify-between items-center">
         <span className="text-xl">₹{price}</span>

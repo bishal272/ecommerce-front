@@ -80,7 +80,7 @@ export default function Cart() {
       <div className="pl-40 pr-20 pt-5 ">
         <div className="grid grid-cols-[1.3fr_0.7fr] gap-10 ">
           <div className="bg-gray-200 w-full p-10 rounded-2xl min-h-[120]">
-            <h1 className="text-3xl font-bold pl-2">Cart</h1>
+            <h1>Cart</h1>
             {!cartProducts?.length && <div className="p-2">Your cart is empty</div>}
             {products?.length > 0 && (
               <table className="basic mt-5">
@@ -131,7 +131,7 @@ export default function Cart() {
           {!!cartProducts?.length && (
             <div>
               <div className="bg-gray-200 rounded-2xl  relative max-h-fit pt-10">
-                <h1 className="text-3xl font-bold text-center ">Order Information</h1>
+                <h1 className="text-center ">Order Information</h1>
 
                 <div className="w-full flex flex-col items-center justify-center mt-4 border p-4">
                   <input

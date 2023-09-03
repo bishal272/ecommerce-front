@@ -31,7 +31,7 @@ export function CartContextProvider({ children }) {
     });
   }
   function clearCart() {
-    ls?.removeItem("cart");
+    ls.removeItem("cart");
     setCartProducts([]);
   }
   return (

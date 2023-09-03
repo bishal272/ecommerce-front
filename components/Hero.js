@@ -2,10 +2,12 @@ import { signIn, useSession } from "next-auth/react";
 import { useContext } from "react";
 import { withSwal } from "react-sweetalert2";
 import { CartContext } from "./CartContext";
+import { useRouter } from "next/router";
 
 function Hero({ product, swal }) {
   const { data: session } = useSession();
   const { addProduct } = useContext(CartContext);
+  const router = useRouter();
   function addHeroProductToCart() {
     if (!session) {
       swal
@@ -24,12 +26,16 @@ function Hero({ product, swal }) {
     }
   }
   return (
-    <div className=" bg-black text-white flex justify-center items-center gap-38 py-4">
+    <div className=" bg-black text-white flex justify-center items-center gap-38 py-4 h-96">
       <div className="flex flex-col gap-10 ">
         <h1 className="text-5xl">{product.title}</h1>
         <p className="text-gray-400">{product.description}</p>
         <div className="flex gap-2">
-          <button className="btn-default btn-ani">Read More</button>
+          <button
+            className="btn-default btn-ani"
+            onClick={() => router.push("/product/" + product._id)}>
+            Read More
+          </button>
           <button className="btn-primary flex gap-1 btn-ani" onClick={addHeroProductToCart}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
