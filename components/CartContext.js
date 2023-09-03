@@ -25,7 +25,11 @@ export function CartContextProvider({ children }) {
     setCartProducts((prev) => {
       const pos = prev.indexOf(productId);
       if (pos !== -1) {
-        return prev.filter((value, index) => index !== pos);
+        const newPrev = prev.filter((value, index) => index !== pos);
+        if (!newPrev.length) {
+          ls.removeItem("cart");
+        }
+        return newPrev;
       }
       return prev;
     });
