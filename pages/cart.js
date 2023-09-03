@@ -24,6 +24,7 @@ export default function Cart() {
       setProducts([]);
     }
   }, [cartProducts]);
+
   function moreOfThisProduct(id) {
     addProduct(id);
   }
@@ -49,21 +50,22 @@ export default function Cart() {
     const price = products.find((p) => p._id === productId)?.price || 0;
     total += price;
   }
-  //needs to change
-  if (router.asPath.includes("success")) {
+
+  if (typeof window !== "undefined" && window.location.href.includes("success")) {
     return (
-      <>
-        <Layout>
+      <Layout>
+        <div className="pl-40 pr-20 pt-5 ">
           <div className="flex items-center justify-center ">
             <div className="bg-gray-200 w-96 p-10 rounded-2xl min-h-[120] ">
               <h1>Thanks for your Order!</h1>
               <p>We will email you when your order is shipped.</p>
             </div>
           </div>
-        </Layout>
-      </>
+        </div>
+      </Layout>
     );
   }
+
   return (
     <Layout>
       <div className="pl-40 pr-20 pt-5 ">
