@@ -63,11 +63,11 @@ export default function Cart() {
   if (isSuccess) {
     return (
       <Layout>
-        <div className="pl-40 pr-20 pt-5 ">
+        <div className="lg:pl-24 lg:pr-20 pt-5 ">
           <div className="flex items-center justify-center ">
-            <div className="bg-gray-200 w-96 p-10 rounded-2xl min-h-[120] ">
+            <div className="bg-gray-200 w-96 p-7 mt-10 rounded-2xl min-h-[120] ">
               <h1>Thanks for your Order!</h1>
-              <p>We will email you when your order is shipped.</p>
+              <p className="mt-5">We will email you when your order is shipped.</p>
             </div>
           </div>
         </div>
