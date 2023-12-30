@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext } from "react";
 import { withSwal } from "react-sweetalert2";
@@ -6,27 +5,14 @@ import { CartContext } from "./CartContext";
 
 function ProductBox({ _id, title, description, price, images, swal }) {
   const { addProduct } = useContext(CartContext);
-  const { data: session } = useSession();
+
   function addProductToCart() {
-    if (!session) {
-      swal
-        .fire({
-          title: "Log in to start shopping😊",
-          confirmButtonText: "Sign in with google",
-          cancelButtonText: "Cancel",
-          showCancelButton: "True",
-          cancelButtonColor: "#ff7f7f",
-          confirmButtonColor: "#279EFF",
-        })
-        .then((result) => {
-          // when confirmed and promise resolved...
-          if (result.isConfirmed) {
-            signIn("google");
-          }
-        });
-    } else {
-      addProduct(_id);
-    }
+    addProduct(_id);
+    swal.fire({
+      title: "Product added to cart!😊",
+      type: "success",
+      timer: 500,
+    });
   }
   return (
     <div className="drop-shadow-lg">

@@ -1,9 +1,12 @@
 import Layout from "@/components/Layout";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Account() {
   const { data: session } = useSession();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
   if (session) {
     return (
@@ -28,10 +31,36 @@ export default function Account() {
       <div className="lg:pl-40 lg:pr-20 pt-5 ">
         <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-10">
           <div className="bg-gray-200 w-full p-10 rounded-2xl min-h-[120] ">
-            <h1>You are not logged in!</h1>
+            <h1>Sign In</h1>
+            <div className="mt-5">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(ev) => setEmail(ev.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(ev) => setPassword(ev.target.value)}
+              />
+            </div>
+            <div>
+              <button
+                className="bg-white p-2 mb-1 text-black rounded-lg px-4 shadow-md border border-gray-200  items-center gap-2"
+                onClick={async () =>
+                  await signIn("credentials", { redirect: false, email: email, password: password })
+                }>
+                Sign in with Email
+              </button>
+            </div>
+
             <button
-              className="bg-white p-2 mt-10 text-black rounded-lg px-4 shadow-md border border-gray-200 inline-flex items-center gap-2"
-              onClick={() => signIn("google")}>
+              className="bg-white p-2 mt-1 text-black rounded-lg px-4 shadow-md border border-gray-200 inline-flex items-center gap-2"
+              onClick={() => {
+                signIn("google");
+              }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
