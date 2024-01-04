@@ -14,7 +14,7 @@ export default function Header() {
           <Link
             href={"/"}
             className="text-2xl text-white hover:text-gray-400 flex justify-center items-center gap-2">
-            Ecommerce
+            Cartify
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
